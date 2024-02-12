@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class GuessTheNumber {
+
+    public static void main(String[] args) {
+        Scanner p = new Scanner(System.in);
+        Random rand = new Random();
+        int totalScore = 0;
+        int rounds = 0;
+
+        while (true) {
+            rounds++;
+            // r1 is the no.of rounds
+            int r1 = rand.nextInt(100) + 1;
+            int at = 0;//Attempts
+            int mat = 5; //maximum attempts
+            int roundScore = 0; 
+
+            System.out.println("Round " + rounds);
+            System.out.println("Guess the Number between 1 and 100");
+
+            while (at < mat) {
+                System.out.println("Attempts left: " + (mat - at));
+                int guess = p.nextInt();
+                at++;
+
+                if (guess == r1) {
+                    System.out.println("Congratulations! Your guess is correct.");
+                    roundScore = mat - at + 1; // Calculate score for this round
+                    totalScore += roundScore; // Update total score
+                    break;
+                } else if (guess < r1) {
+                    System.out.println("Your guess is too low.");
+                } else {
+                    System.out.println("Your guess is too high.");
+                }
+            }
+
+            if (at == mat) {
+                System.out.println("You've used all your attempts. The correct number was: " + r1);
+            }
+
+            System.out.println("Your score for this round is: " + roundScore);
+            System.out.println("Your total score is: " + totalScore);
+            System.out.println("Do you want to play again? (yes/no)");
+            String pag = p.next();//playAgainResponse
+
+            if (!pag.equalsIgnoreCase("yes")) {
+                break;
+            }
+        }
+
+        System.out.println("Game over! You played " + rounds + " rounds. Your final score is: " + totalScore);
+    }
+}
